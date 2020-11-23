@@ -3,6 +3,7 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const bcrypt = require('bcrypt'); 
+const { Pool } = require('pg');
 const app = express();
 const PORT = 3000;
 const quizController = require('./quizController.js');
@@ -23,6 +24,26 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // Parse json requests as json 
+const pool = new Pool({
+  connectionString:
+    'postgres://oebljrrf:s6TaaMbtHrgeJ8sWqHmpkdd1kJjbg2N5@suleiman.db.elephantsql.com:5432/oebljrrf',
+});
+
+const db = {
+  query: async function (text, params, callback) {
+    console.log('executed query', text);
+    let data = await pool.query(text, params, callback);
+    return data;
+  },
+};
+
+app.use(
+  db.query('',(err) => {
+        if (err) {
+            console.log(err);
+        }
+    });
+);
 app.use(express.json());
 
 // statically serve everything in the build folder on the route '/build'
