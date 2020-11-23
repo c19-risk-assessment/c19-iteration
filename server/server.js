@@ -1,10 +1,29 @@
+// imported modules 
 const express = require('express');
 const path = require('path');
+const passport = require('passport');
+const bcrypt = require('bcrypt'); 
 const { Pool } = require('pg');
 const app = express();
 const PORT = 3000;
 const quizController = require('./quizController.js');
+const authenticationController = require('./authenticationController.js'); 
+const configurePassport = require('./configurePassport.js'); 
 
+// configure passport authnetication with function imported from configurationfile 
+configurePassport(passport); 
+
+// boilerplate middleware for passport 
+app.use(express.urlencoded({extended: false})); 
+app.use(session({
+    secret: "cats",
+    resave: false, 
+    saveUninitialized: false
+})); 
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Parse json requests as json 
 const pool = new Pool({
   connectionString:
     'postgres://oebljrrf:s6TaaMbtHrgeJ8sWqHmpkdd1kJjbg2N5@suleiman.db.elephantsql.com:5432/oebljrrf',
@@ -29,6 +48,26 @@ app.use(express.json());
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
+
+// route hander for registering the user and saving user's info to the database 
+
+app.post('/register', authenticationController.checkNotAuthenticated, async (req, res) => {
+    try{
+        // use bcrypt to hash the password provided in the body of the post request 
+        const encryptedPassword = await bcrypt.hash(req.body.password, 10);
+
+        // SQL query to insert new row into the database with user's information, including hashed password  
+
+        // redirect user login after sucessful registration 
+
+        res.redirect('/login'); 
+    }
+    // if any errors occur send the user back to registration page 
+    catch {
+        res.redirect('/register'); 
+    }
+}); 
+
 
 // route handler to send risk assessment results back to client
 app.get('*', (req, res) => {
