@@ -1,22 +1,17 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Redirect, NavLink } from 'react-router-dom';
 
 import AssessmentPage from './components/AssessmentPage.jsx';
 import ResultsPage from './components/ResultsPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
-import Profile from './components/Profile.jsx';
-import Histogram from './components/Histogram.jsx'
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: 'keon'
       riskLevel: '',
       riskyActs: [],
       answers: [],
-      levelTable: [{}, {}]
     };
 
     this.submitAnswers = this.submitAnswers.bind(this);
@@ -25,24 +20,7 @@ class App extends Component {
     this.getRiskLevel = this.getRiskLevel.bind(this);
     this.getRiskyActs = this.getRiskyActs.bind(this);
   }
-  componentDidMount() {
-    window.onscroll = function () { myFunction() };
 
-    // Get the navbar
-    var navbar = document.getElementById("stickyNavbar");
-
-    // Get the offset position of the navbar
-    var sticky = navbar.offsetTop;
-
-    // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
-    function myFunction() {
-      if (window.pageYOffset >= sticky) {
-        navbar.classList.add("sticky")
-      } else {
-        navbar.classList.remove("sticky");
-      }
-    }
-  }
   submitAnswers() {
     fetch('/', {
       method: 'POST',
@@ -96,20 +74,16 @@ class App extends Component {
   render() {
     return (
       <div>
-        <div id="stickyNavbar">
-          <div id='profileLink'>
-            <NavLink to="/profile" >Profile</NavLink>
-          </div>
-        </div>
+        <h1>Covid Risk Assessment Quiz</h1>
         <Switch>
           <Route exact path="/">
-            <h1>Covid Risk Assessment Quiz</h1>
             <AssessmentPage
               submitAnswers={this.submitAnswers}
               add={this.addToAnswers}
               remove={this.removeFromAnswers}
             />
           </Route>
+
           <Route path="/results">
             <ResultsPage
               riskLevel={this.state.riskLevel}
@@ -117,12 +91,6 @@ class App extends Component {
               getRiskLevel={this.getRiskLevel}
               getRiskyActs={this.getRiskyActs}
             />
-          </Route>
-          <Route path="/profile">
-            <Profile />
-          </Route>
-          <Route exact path="/histogram">
-            <Histogram name={this.state.user} />
           </Route>
           <Route component={ErrorPage} />
         </Switch>
@@ -132,5 +100,3 @@ class App extends Component {
 }
 
 export default App;
-
-
