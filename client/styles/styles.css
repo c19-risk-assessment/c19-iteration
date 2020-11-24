@@ -1,153 +1,205 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Shrikhand&display=swap');
 
 body {
-	box-sizing: content-box;
-	/* background: url("https://user-images.githubusercontent.com/54503796/99884480-83ec8180-2bfc-11eb-824b-2c484ba02014.jpg"); */
-	/* background: url("https://user-images.githubusercontent.com/54503796/99885890-1ba29d80-2c06-11eb-9852-199778c60251.jpg");
+<<<<<<< HEAD
+  margin-top: 80px;
+=======
+>>>>>>> main
+  box-sizing: content-box;
+  /* background: url("https://user-images.githubusercontent.com/54503796/99884480-83ec8180-2bfc-11eb-824b-2c484ba02014.jpg"); */
+  /* background: url("https://user-images.githubusercontent.com/54503796/99885890-1ba29d80-2c06-11eb-9852-199778c60251.jpg");
   background-size: 50%; */
-	background: rgb(215, 247, 244);
-	background: url('https://user-images.githubusercontent.com/54503796/99887077-5957f400-2c0f-11eb-9720-eebdf664f283.png'),
-		linear-gradient(
-			90deg,
-			rgba(215, 247, 244, 1) 0%,
-			rgba(177, 241, 180, 1) 27%,
-			rgba(240, 232, 127, 1) 50%,
-			rgba(254, 189, 82, 1) 72%,
-			rgba(255, 107, 0, 1) 100%
-		);
+  background: rgb(215, 247, 244);
+  background: url('https://user-images.githubusercontent.com/54503796/99887077-5957f400-2c0f-11eb-9720-eebdf664f283.png'),
+    linear-gradient(
+      90deg,
+      rgba(215, 247, 244, 1) 0%,
+      rgba(177, 241, 180, 1) 27%,
+      rgba(240, 232, 127, 1) 50%,
+      rgba(254, 189, 82, 1) 72%,
+      rgba(255, 107, 0, 1) 100%
+    );
 }
 
 h1 {
-	font-family: 'Shrikhand', cursive;
-	font-size: 4.25em;
-	color: #3a057b;
-	padding: 0;
-	margin: 0 0 0 60px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: strong;
+  font-size: 10em;
+  color: #fe6c06;
+  padding: 0;
+  margin: 0 0 0 60px;
 }
 
 #assessment-page {
-	display: grid;
-	grid-template-columns: 1fr 3fr;
+  display: grid;
+  grid-template-columns: 1fr 3fr;
 }
 
 .window {
-	border: solid 0px black;
-	padding: 40px 0 0 40px;
-	margin: 0;
+  border: solid 0px black;
+  padding: 40px 0 0 40px;
+  margin: 0;
 }
 
 .question {
-	border: dotted 0px grey;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	font-size: 1.25em;
-	/* margin: 10px; */
-	padding-top: 15px;
+  border: dotted 0px grey;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1.25em;
+  /* margin: 10px; */
+  padding-top: 15px;
 }
 
 .window button {
-	padding: 0.7em 4em;
-	margin: 30px 120px;
-	border: 0.1em solid #ffffff;
-	border-radius: 0.12em;
-	text-decoration: none;
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	font-size: 1.3em;
-	color: white;
-	text-align: center;
-	background-color: #3a057b;
+  padding: 0.7em 4em;
+  margin: 30px 120px;
+  border: 0.1em solid #ffffff;
+  border-radius: 0.12em;
+  text-decoration: none;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.3em;
+  color: white;
+  text-align: center;
+  background-color: #3a057b;
 }
 
 .about-window {
-	border-radius: 10px;
-	background: #ffffff;
-	flex: 1;
-	max-width: 100%;
-	padding: 25px 30px;
-	/* margin: 0 60px; */
-	/* margin: 40px 100px 40px 40px; */
-	box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
+  border-radius: 10px;
+  background: #ffffff;
+  flex: 1;
+  max-width: 100%;
+  padding: 25px 30px;
+  /* margin: 0 60px; */
+  /* margin: 40px 100px 40px 40px; */
+  box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
 }
 
 .about-window h3 {
-	border: 0px solid red;
-	font-family: 'Roboto', sans-serif;
-	font-weight: bold;
-	font-size: 2em;
-	color: #fe6c06;
-	padding: 5px 0 0 0;
-	margin: 0px;
+  border: 0px solid red;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 2em;
+  color: #fe6c06;
+  padding: 5px 0 0 0;
+  margin: 0px;
 }
 
 .about-window p {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	font-size: 1em;
-	padding: 10px 0 0 0;
-	margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 1em;
+  padding: 10px 0 0 0;
+  margin: 0;
 }
 
 .assessment-window {
-	flex: 2;
-	max-width: 60%;
-	/* align-self: center; */
-	padding: 30px 40px;
-	margin: 0 120px;
-	/* margin: 40px 40px 40px 0; */
-	border-radius: 10px;
-	background: #ffffff;
-	box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
+  flex: 2;
+  max-width: 60%;
+  /* align-self: center; */
+  padding: 30px 40px;
+  margin: 0 120px;
+  /* margin: 40px 40px 40px 0; */
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
 }
 
 .assessment-window h3 {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	font-size: 2em;
-	color: #fe6c06;
-	padding: 0;
-	margin: 0 0 5px 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 2em;
+  color: #fe6c06;
+  padding: 0;
+  margin: 0 0 5px 0;
 }
 
 #results-header {
-	font-family: 'Shrikhand', cursive;
-	font-weight: bold;
-	font-size: 2.5em;
-	color: #3a057b;
-	padding: 5px 0;
-	margin: 0px;
+  font-family: 'Shrikhand', cursive;
+  font-weight: bold;
+  font-size: 2.5em;
+  color: #3a057b;
+  padding: 5px 0;
+  margin: 0px;
 }
 
 .results-label {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 700;
-	font-size: 1.75em;
-	color: #3a057b;
-	padding: 5px 0;
-	margin: 0px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  font-size: 1.75em;
+  color: #3a057b;
+  padding: 5px 0;
+  margin: 0px;
 }
 
 .activity {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	font-size: 2em;
-	color: #fe6c06;
-	padding: 0;
-	margin: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 2em;
+  color: #fe6c06;
+  padding: 0;
+  margin: 0;
 }
 
 #results-window {
-	max-width: 80%;
-	/* align-self: center; */
-	padding: 30px 40px;
-	margin: 0 60px;
-	/* margin: 40px 40px 40px 0; */
-	border-radius: 10px;
-	background: #ffffff;
-	box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
+  max-width: 80%;
+  /* align-self: center; */
+  padding: 30px 40px;
+  margin: 0 60px;
+  /* margin: 40px 40px 40px 0; */
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
 }
 
 #questions {
-	display: grid;
-	grid-template-columns: 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+/*---------------------------------------*/
+#stickyNavbar {
+  margin: 0px;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+/* Navbar links */
+#stickyNavbar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+/* Page content */
+.content {
+  padding: 16px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  /* position: fixed; */
+  top: 0;
+  width: 100%;
+}
+
+/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
+.sticky + .content {
+  padding-top: 60px;
+}
+#profileLink {
+  float: right;
+}
+
+.navbar {
+  background-color: #e8e8e8;
+  display: flex;
+  height: 7.5%;
+  justify-content: flex-end;
 }
