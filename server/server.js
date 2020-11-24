@@ -8,15 +8,38 @@ const PORT = 3000;
 const quizController = require('./quizController.js');
 const authenticationController = require('./authenticationController.js'); 
 const configurePassport = require('./configurePassport.js'); 
-const sqlController = require('./sqlController.js')
+const sqlController = require('./sqlController.js'); 
+const session = require('express-session');
+const bodyParser = require('body-parser')
+// establish connection to database 
+
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  connectionString:
+    'postgres://oebljrrf:s6TaaMbtHrgeJ8sWqHmpkdd1kJjbg2N5@suleiman.db.elephantsql.com:5432/oebljrrf',
+});
+
+const db = {
+  async query (text, params, callback) {
+    console.log('executed query', text);
+    const data = await pool.query(text, params, callback);
+    return data;
+  },
+};
 
 
 // configure passport authnetication with function imported from configurationfile 
-configurePassport(passport); 
-
 
 // boilerplate middleware for passport 
+// Parse json requests as json 
+// app.use(bodyParser.json())
+app.use(express.json());
 app.use(express.urlencoded({extended: false})); 
+// app.use(express.raw())
+
+configurePassport(passport); 
+
 app.use(session({
     secret: "cats",
     resave: false, 
@@ -26,21 +49,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-// Parse json requests as json 
 
-// app.use(
-//   db.query('',(err) => {
-//         if (err) {
-//             console.log(err);
-//         }
-//     });
-// );
-
-// CREATE TABLE assessments(_id INT, mail VARCHAR(20), takeout VARCHAR(20), gas VARCHAR(20), tennis VARCHAR(20), camp VARCHAR(20), grocery VARCHAR(20), walk VARCHAR(20), restaurantOut VARCHAR(20), doctor VARCHAR(20), downtown VARCHAR(20), house VARCHAR(20), bbq VARCHAR(20), mall VARCHAR(20), kids VARCHAR(20), elderly VARCHAR(20), hair VARCHAR(20), restaurantIn VARCHAR(20), plane VARCHAR(20), wedding VARCHAR(20), hug VARCHAR(20), gym VARCHAR(20), movie VARCHAR(20), music VARCHAR(20), religious VARCHAR(20), bar VARCHAR(20), location_id INT, user_id INT, pos_rate FLOAT)
-
-
-
-app.use(express.json());
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
@@ -60,13 +69,9 @@ app.post('/register', authenticationController.checkNotAuthenticated,authenticat
     }
 }); 
 
-//m d  y
-//11022020 date (varchar)
-//5 score  (int)
-
-
 
 // route handler to send risk assessment results back to client
+// index.html includes react router that routes everything
 app.get('*', (req, res) => {
   res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });

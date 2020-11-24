@@ -19,6 +19,7 @@ class App extends Component {
     this.removeFromAnswers = this.removeFromAnswers.bind(this);
     this.getRiskLevel = this.getRiskLevel.bind(this);
     this.getRiskyActs = this.getRiskyActs.bind(this);
+    this.test = this.test.bind(this);
   }
 
   submitAnswers() {
@@ -71,10 +72,26 @@ class App extends Component {
     return this.state.riskLevel;
   }
 
+  test() {
+    fetch("/register", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				username: "testrun400",
+				password: "testpw300",
+			})
+		}).catch((err) => {
+			console.log(err);
+		});
+  }
+
   render() {
     return (
 			<div>
 				<h1>Covid Risk Assessment Quiz</h1>
+        <button onClick={this.test}>Click ME!</button>
 				<Switch>
 					<Route exact path='/'>
 						<AssessmentPage
@@ -95,7 +112,7 @@ class App extends Component {
 					<Route component={ErrorPage} />
 				</Switch>
 			</div>
-		);
+    );
   }
 }
 
