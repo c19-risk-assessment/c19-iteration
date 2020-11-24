@@ -4,9 +4,10 @@ import { Link, Route, Switch } from 'react-router-dom';
 // import AssessmentPage from './components/AssessmentPage.jsx';
 import ResultsPage from './components/ResultsPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
-// import SignIn from './components/Signin.jsx';
 import SignUp from './components/Form.jsx';
 import AssessmentPage from './components/AssessmentPage.jsx';
+import Navbar from './components/NavBar.jsx';
+import MainPage from './components/mainpage.js';
 
 class App extends Component {
   constructor(props) {
@@ -77,11 +78,11 @@ class App extends Component {
   render() {
     return (
       <div>
-        <h1>Covid Risk Assessment Quiz</h1>
-
+        {/* <h1>Covid Risk Assessment Quiz</h1> */}
+        <Navbar />
         <Switch>
           <Route exact path="/">
-            {/* <Profile /> */}
+            <SignUp />
           </Route>
           <Route exact path="/assessment">
             <AssessmentPage
