@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Shrikhand&display=swap');
 
 body {
-	margin-top:80px;
 	box-sizing: content-box;
 	/* background: url("https://user-images.githubusercontent.com/54503796/99884480-83ec8180-2bfc-11eb-824b-2c484ba02014.jpg"); */
 	/* background: url("https://user-images.githubusercontent.com/54503796/99885890-1ba29d80-2c06-11eb-9852-199778c60251.jpg");
@@ -151,44 +150,4 @@ h1 {
 #questions {
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-}
-/*---------------------------------------*/
-#stickyNavbar {
-  margin :0px;
-  overflow: hidden;
-  background-color: #333;
-  position: fixed;
-  top: 0;
-  left:0;
-  width: 100%;
-}
-
-/* Navbar links */
-#stickyNavbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
-}
-
-/* Page content */
-.content {
-  padding: 16px;
-}
-
-/* The sticky class is added to the navbar with JS when it reaches its scroll position */
-.sticky {
-  /* position: fixed; */
-  top: 0;
-  width: 100%;
-}
-
-/* Add some top padding to the page content to prevent sudden quick movement (as the navigation bar gets a new position at the top of the page (position:fixed and top:0) */
-.sticky + .content {
-  padding-top: 60px;
-}
-#profileLink{
-	float: right;
 }
