@@ -7,7 +7,7 @@ import ErrorPage from './components/ErrorPage.jsx';
 import SignUp from './components/Form.jsx';
 import AssessmentPage from './components/AssessmentPage.jsx';
 import Navbar from './components/NavBar.jsx';
-import MainPage from './components/mainpage.js';
+import LogIn from './components/logIn.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -16,6 +16,8 @@ class App extends Component {
       riskLevel: '',
       riskyActs: [],
       answers: [],
+      username: '',
+      password: '',
     };
 
     this.submitAnswers = this.submitAnswers.bind(this);
@@ -23,6 +25,8 @@ class App extends Component {
     this.removeFromAnswers = this.removeFromAnswers.bind(this);
     this.getRiskLevel = this.getRiskLevel.bind(this);
     this.getRiskyActs = this.getRiskyActs.bind(this);
+    this.handleLogIn = this.handleLogIn.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
   }
 
   submitAnswers() {
@@ -75,11 +79,40 @@ class App extends Component {
     return this.state.riskLevel;
   }
 
+  handleInputChange(event) {
+    event.preventDefault();
+    console.log('This is the event Name ', event.target.name);
+    console.log('This is the input value ', event.target.value);
+  }
+
+  handleLogIn(username, password) {
+    fetch('/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: username, password: password }),
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log('this is the response data', data);
+
+        // const cookie = data.activities.riskyActs;
+
+        // this.setState({
+        //   ...this.state,
+        //   riskLevel: newRisk,
+        //   riskyActs: newRiskyActs,
+        // });
+      });
+  }
+
   render() {
     return (
       <div>
-        {/* <h1>Covid Risk Assessment Quiz</h1> */}
         <Navbar />
+        <center>
+          {' '}
+          <h1>Covid Risk Assessment Quiz</h1>
+        </center>
         <Switch>
           <Route exact path="/">
             <SignUp />
@@ -94,7 +127,14 @@ class App extends Component {
           <Route exact path="/signup">
             <SignUp />
           </Route>
-
+          <Route exact path="/logIn">
+            <LogIn
+              logIn={this.handleLogIn}
+              inputChange={this.handleInputChange}
+              userName={this.state.username}
+              passWord={this.state.password}
+            />
+          </Route>
           <Route path="/results">
             <ResultsPage
               riskLevel={this.state.riskLevel}

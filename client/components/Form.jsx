@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-// import axios from 'axios';
+import axios from 'axios';
 
 import {
   Icon,
@@ -37,10 +37,24 @@ class SignUp extends Component {
     event.preventDefault();
     console.log('This is the event Name ', event.target.name);
     console.log('This is the input value ', event.target.value);
+    const curEventName = event.target.name;
+    this.setState({
+      [curEventName]: event.target.value,
+    });
   }
 
   handleSubmit(event) {
     // put the fetch request in here when someone clicks the button.
+    const data = this.state;
+    console.log('final data is ', data);
+    axios
+      .post('/register', data)
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   // const toast = useToast();
