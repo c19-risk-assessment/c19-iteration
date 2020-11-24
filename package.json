@@ -37,8 +37,12 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
+    "@chakra-ui/react": "^1.0.1",
+    "@emotion/react": "^11.1.1",
+    "@emotion/styled": "^11.0.0",
     "axios": "^0.19.2",
     "express": "^4.17.1",
+    "framer-motion": "^2.9.4",
     "react": "^16.13.1",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0"

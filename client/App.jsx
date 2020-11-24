@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Link, Route, Switch } from 'react-router-dom';
 
-import AssessmentPage from './components/AssessmentPage.jsx';
+// import AssessmentPage from './components/AssessmentPage.jsx';
 import ResultsPage from './components/ResultsPage.jsx';
 import ErrorPage from './components/ErrorPage.jsx';
+// import SignIn from './components/Signin.jsx';
+import SignUp from './components/Form.jsx';
+import AssessmentPage from './components/AssessmentPage.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -75,13 +78,20 @@ class App extends Component {
     return (
       <div>
         <h1>Covid Risk Assessment Quiz</h1>
+
         <Switch>
           <Route exact path="/">
+            {/* <Profile /> */}
+          </Route>
+          <Route exact path="/assessment">
             <AssessmentPage
               submitAnswers={this.submitAnswers}
               add={this.addToAnswers}
               remove={this.removeFromAnswers}
             />
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
           </Route>
 
           <Route path="/results">
