@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 import {
   Icon,
@@ -14,86 +15,44 @@ import {
   Flex,
   CloseButton,
   Center,
+  toast
 } from '@chakra-ui/react';
 
-export default function SignUp({ signedUp }) {
-  const defaultState = {
-    firstname: '',
-    lastname: '',
-    email: '',
-    username: '',
-    password: '',
-    addressnumber: '',
-    streetaddress: '',
-    zipcode: '',
-  };
+class SignUp extends Component {
+  constructor(props){
+    super(props);
 
-  const [state, setState] = useState(defaultState);
-
-  function firstnameChange(field) {
-    setState({
-      ...state,
-      firstname: field.target.value,
-    });
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      userName: '',
+      password: '',
+      addressNumber: '',
+      streetAddress: '',
+      zipCode: '',
+    };
+    this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
+  
+  handleInputChange(event) {
+    event.preventDefault();
+    console.log('This is the event Name ', event.target.name);
+    console.log('This is the input value ', event.target.value);
 
-  function lastnameChange(field) {
-    setState({
-      ...state,
-      lastname: field.target.value,
-    });
+
   }
-
-  function addressnumberChange(field) {
-    setState({
-      ...state,
-      addressnumber: field.target.value,
-    });
+  
+  handleSubmit(event) {
+    // put the fetch request in here when someone clicks the button.
   }
+ 
 
-  function streetaddressChange(field) {
-    setState({
-      ...state,
-      streetaddress: field.target.value,
-    });
-  }
-
-  function zipcodeChange(field) {
-    setState({
-      ...state,
-      zipcode: field.target.value,
-    });
-  }
-
-  function usernameChange(field) {
-    setState({
-      ...state,
-      username: field.target.value,
-    });
-  }
-
-  function passwordChange(field) {
-    setState({
-      ...state,
-      password: field.target.value,
-    });
-  }
-
-  function clicked() {
-    signedUp(
-      state.firstname,
-      state.lastname,
-      state.addressnumber,
-      state.streetaddress,
-      state.zipcode,
-      state.username,
-      state.password
-    );
-  }
-
-  // const toast = useToast();
+  const toast = useToast();
 
   return (
+   
     <Container maxW="max" maxH="max">
       <Center pt="40px" pb="800px">
         <Flex
@@ -114,12 +73,12 @@ export default function SignUp({ signedUp }) {
             height="225px"
             margin="15px"
           />
-          <form action="submit">
+          <form action = 'submit'>
             <Stack spacing={6}>
               <FormControl isRequired>
                 <InputGroup mt="10px" width="sm">
                   <InputLeftAddon children="First Name:" />
-                  <Input variant="filled" onChange={firstnameChange} />
+                  <Input variant="filled" name='firstName' onChange={this.handleInputChange} />
                 </InputGroup>
                 <InputGroup mt="10px" width="sm">
                   <InputLeftAddon children="Last Name:" />
@@ -152,7 +111,7 @@ export default function SignUp({ signedUp }) {
                   mb="30px"
                   width="sm"
                   onClick={() => {
-                    clicked();
+                    this.handleSubmit();
                     toast({
                       title: 'Signed up.',
                       description: "We've created a new account for you.",
@@ -172,3 +131,5 @@ export default function SignUp({ signedUp }) {
     </Container>
   );
 }
+
+export default SignUp;
