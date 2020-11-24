@@ -73,29 +73,29 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Covid Risk Assessment Quiz</h1>
-        <Switch>
-          <Route exact path="/">
-            <AssessmentPage
-              submitAnswers={this.submitAnswers}
-              add={this.addToAnswers}
-              remove={this.removeFromAnswers}
-            />
-          </Route>
+			<div>
+				<h1>Covid Risk Assessment Quiz</h1>
+				<Switch>
+					<Route exact path='/'>
+						<AssessmentPage
+							submitAnswers={this.submitAnswers}
+							add={this.addToAnswers}
+							remove={this.removeFromAnswers}
+						/>
+					</Route>
 
-          <Route path="/results">
-            <ResultsPage
-              riskLevel={this.state.riskLevel}
-              riskyActs={this.state.riskyActs}
-              getRiskLevel={this.getRiskLevel}
-              getRiskyActs={this.getRiskyActs}
-            />
-          </Route>
-          <Route component={ErrorPage} />
-        </Switch>
-      </div>
-    );
+					<Route path='/results'>
+						<ResultsPage
+							riskLevel={this.state.riskLevel}
+							riskyActs={this.state.riskyActs}
+							getRiskLevel={this.getRiskLevel}
+							getRiskyActs={this.getRiskyActs}
+						/>
+					</Route>
+					<Route component={ErrorPage} />
+				</Switch>
+			</div>
+		);
   }
 }
 

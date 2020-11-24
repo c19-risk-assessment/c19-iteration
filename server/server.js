@@ -3,15 +3,17 @@ const express = require('express');
 const path = require('path');
 const passport = require('passport');
 const bcrypt = require('bcrypt'); 
-const { Pool } = require('pg');
 const app = express();
 const PORT = 3000;
 const quizController = require('./quizController.js');
 const authenticationController = require('./authenticationController.js'); 
 const configurePassport = require('./configurePassport.js'); 
+const sqlController = require('./sqlController.js')
+
 
 // configure passport authnetication with function imported from configurationfile 
 configurePassport(passport); 
+
 
 // boilerplate middleware for passport 
 app.use(express.urlencoded({extended: false})); 
@@ -20,30 +22,24 @@ app.use(session({
     resave: false, 
     saveUninitialized: false
 })); 
+
 app.use(passport.initialize());
 app.use(passport.session());
 
 // Parse json requests as json 
-const pool = new Pool({
-  connectionString:
-    'postgres://oebljrrf:s6TaaMbtHrgeJ8sWqHmpkdd1kJjbg2N5@suleiman.db.elephantsql.com:5432/oebljrrf',
-});
 
-const db = {
-  query: async function (text, params, callback) {
-    console.log('executed query', text);
-    let data = await pool.query(text, params, callback);
-    return data;
-  },
-};
+// app.use(
+//   db.query('',(err) => {
+//         if (err) {
+//             console.log(err);
+//         }
+//     });
+// );
 
-app.use(
-  db.query('',(err) => {
-        if (err) {
-            console.log(err);
-        }
-    });
-);
+// CREATE TABLE assessments(_id INT, mail VARCHAR(20), takeout VARCHAR(20), gas VARCHAR(20), tennis VARCHAR(20), camp VARCHAR(20), grocery VARCHAR(20), walk VARCHAR(20), restaurantOut VARCHAR(20), doctor VARCHAR(20), downtown VARCHAR(20), house VARCHAR(20), bbq VARCHAR(20), mall VARCHAR(20), kids VARCHAR(20), elderly VARCHAR(20), hair VARCHAR(20), restaurantIn VARCHAR(20), plane VARCHAR(20), wedding VARCHAR(20), hug VARCHAR(20), gym VARCHAR(20), movie VARCHAR(20), music VARCHAR(20), religious VARCHAR(20), bar VARCHAR(20), location_id INT, user_id INT, pos_rate FLOAT)
+
+
+
 app.use(express.json());
 
 // statically serve everything in the build folder on the route '/build'
@@ -51,13 +47,9 @@ app.use('/build', express.static(path.join(__dirname, '../build')));
 
 // route hander for registering the user and saving user's info to the database 
 
-app.post('/register', authenticationController.checkNotAuthenticated, async (req, res) => {
+app.post('/register', authenticationController.checkNotAuthenticated,authenticationController.encryptAndSave, sqlController.insertUser, async (req, res) => {
     try{
-        // use bcrypt to hash the password provided in the body of the post request 
-        const encryptedPassword = await bcrypt.hash(req.body.password, 10);
-
-        // SQL query to insert new row into the database with user's information, including hashed password  
-
+        
         // redirect user login after sucessful registration 
 
         res.redirect('/login'); 
@@ -67,6 +59,11 @@ app.post('/register', authenticationController.checkNotAuthenticated, async (req
         res.redirect('/register'); 
     }
 }); 
+
+//m d  y
+//11022020 date (varchar)
+//5 score  (int)
+
 
 
 // route handler to send risk assessment results back to client

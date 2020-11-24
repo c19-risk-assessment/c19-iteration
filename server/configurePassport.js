@@ -11,7 +11,7 @@ function configurePassport(passport){
 
         // SQL query to get a single user from the database that matches the username attribute passed in as an argument under the hood by passport 
 
-        const user; // variable to which the resuls of SQL query will be saved 
+        let user;// variable to which the resuls of SQL query will be saved 
 
         // control flow to process resposne from SQL query 
 
