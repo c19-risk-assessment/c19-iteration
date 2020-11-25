@@ -24,10 +24,7 @@ class Profile extends Component {
         return res.json();
       })
       .catch((err) =>
-        console.log(
-          'displayAllFarms.componentDidMount: get farms: ERROR: ',
-          err
-        )
+        console.log("unable to display user's data: ERROR: ", err)
       );
   }
   render() {
