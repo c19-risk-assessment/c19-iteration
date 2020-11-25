@@ -1,5 +1,21 @@
-const LocalStrategy = require('passport-local').Strategy;
-const bcrypt = require('bcrypt');
+const LocalStrategy = require('passport-local').Strategy; 
+const bcrypt = require('bcrypt'); 
+const sqlController = require('./sqlController.js');
+
+const { Pool } = require('pg');
+
+const pool = new Pool({
+  connectionString:
+    'postgres://oebljrrf:s6TaaMbtHrgeJ8sWqHmpkdd1kJjbg2N5@suleiman.db.elephantsql.com:5432/oebljrrf',
+});
+
+const db = {
+  async query (text, params, callback) {
+    console.log('executed query', text);
+    const data = await pool.query(text, params, callback);
+    return data;
+  },
+};
 
 // enclose all passport configuration logic inside outer function
 
@@ -13,7 +29,9 @@ function configurePassport(passport) {
 
     // control flow to process resposne from SQL query
 
-    // if no user is found in the database
+        const findUserString = `SELECT * FROM users WHERE username = ${username}`
+
+        const user = db.query(findUserString);// variable to which the resuls of SQL query will be saved 
 
     if (user == null) {
       // do not return a user
@@ -50,12 +68,14 @@ function configurePassport(passport) {
   function getUserByID(id) {
     // SQL query to get user from the database using id
 
-    let user; // constant to which the result of the SQL query will be assigned
+        // SQL query to get user from the database using id 
+        const getUserString = `SELECT * FROM users WHERE ${id} = _id`
 
-    // return the user
-  }
+        const user = db.query(getUserString); // constant to which the result of the SQL query will be assigned 
 
-  // configure passport with the authenticate function
+        // return the user 
+        return user
+    }  
 
   passport.use(new LocalStrategy(authenticate));
 
