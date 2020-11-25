@@ -9,6 +9,8 @@ import AssessmentPage from './components/AssessmentPage.jsx';
 import Navbar from './components/NavBar.jsx';
 import LogIn from './components/logIn.jsx';
 import Profile from './components/Profile.jsx';
+import Histogram from './components/Histogram.jsx';
+import CovidMap from './components/covidMap.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -158,6 +160,14 @@ class App extends Component {
           </Route>
           <Route exact path="/profile">
             <Profile />
+          </Route>
+          <Route exact path="/histogram">
+            <Histogram />
+            {/* <Histogram name={this.state.username} /> */}
+          </Route>
+          <Route exact path="/covidmap">
+            <CovidMap />
+            {/* <CovidMap gps={this.state.location} /> */}
           </Route>
           <Route exact path="/logIn">
             <LogIn

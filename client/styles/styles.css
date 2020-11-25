@@ -84,10 +84,10 @@ body {
 .assessment-window {
   flex: 2;
   max-width: 60%;
-  align-self: center;
+  /* align-self: center; */
   padding: 30px 40px;
   margin: 0 120px;
-  margin: 40px 40px 40px 0;
+  /* margin: 40px 40px 40px 0; */
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
@@ -145,26 +145,17 @@ body {
   grid-template-columns: 1fr 1fr;
 }
 /*---------------------------------------*/
-#stickyNavbar {
-  margin: 0px;
-  overflow: hidden;
-  background-color: #333;
-  position: fixed;
+
+#canvas1 {
+  position: absolute;
+  margin-top: 0px;
   top: 0;
   left: 0;
-  width: 100%;
 }
-
-/* Navbar links */
-#stickyNavbar a {
-  float: left;
-  display: block;
-  color: #f2f2f2;
-  text-align: center;
-  padding: 14px;
-  text-decoration: none;
+#canvasWrapper {
+  align-items: center;
 }
-
+/*just paste it at the bottom*/
 /* Page content */
 .content {
   padding: 16px;
@@ -213,4 +204,86 @@ h1 {
   color: white;
   padding: 5px;
   margin: 0 0 0 60px;
+}
+
+#canvas1 {
+  position: absolute;
+  margin-top: 0px;
+  top: 0;
+  left: 0;
+}
+#canvasWrapper {
+  align-items: center;
+}
+
+#canvas2 {
+  position: absolute;
+  margin-top: 0px;
+  top: 0;
+  left: 0;
+}
+#myChart {
+  position: relative;
+  z-index: 10;
+  margin-top: 300px;
+}
+
+#proNav {
+  font-family: 'Nunito', sans-serif;
+}
+#userStats {
+  margin-top: 150px;
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  text-align: center;
+}
+#apiLinks {
+  margin-top: 200px;
+  font-family: 'Nunito', sans-serif;
+  position: relative;
+  text-align: center;
+}
+
+/* unvisited link */
+
+.navStyle:link {
+  color: white;
+  text-decoration: none;
+  font-weight: 850;
+}
+
+/* visited link */
+.navStyle:visited {
+  color: white;
+  text-decoration: none;
+  font-weight: 850;
+}
+
+/* mouse over link */
+.navStyle:hover {
+  color: rgb(255, 176, 216);
+  text-decoration: none;
+  font-weight: 900;
+}
+
+/* selected link */
+.navStyle:active {
+  color: white;
+  text-decoration: none;
+  font-weight: 850;
+}
+.niceButton {
+  margin: 0 20px 0 20px;
+  padding: 3px 10px 3px 10px;
+  background-color: rgb(212, 83, 83);
+  float: center;
+  border-radius: 25px;
+  border: none;
+  -webkit-box-shadow: 2px 8px 6px 2px rgb(51, 51, 51); /* Safari 3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+  -moz-box-shadow: 2px 2px 8px 2px rgb(51, 51, 51); /* Firefox 3.5 - 3.6 */
+  box-shadow: 2px 2px 8px 2px rgb(51, 51, 51); /* Opera 10.5, IE 9, Firefox 4+, Chrome 6+, iOS 5 */
+}
+
+.niceButton:focus {
+  outline: none;
 }
