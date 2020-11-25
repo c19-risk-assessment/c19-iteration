@@ -82,29 +82,40 @@ class App extends Component {
 
   // test() {
   //   fetch("/register", {
-	// 		method: "POST",
-	// 		headers: {
-	// 			"Content-Type": "application/json"
-	// 		},
-	// 		body: JSON.stringify({
-	// 			username: "testrun400",
-	// 			password: "testpw300",
-	// 		})
-	// 	}).catch((err) => {
-	// 		console.log(err);
+  // 		method: "POST",
+  // 		headers: {
+  // 			"Content-Type": "application/json"
+  // 		},
+  // 		body: JSON.stringify({
+  // 			username: "testrun400",
+  // 			password: "testpw300",
+  // 		})
+  // 	}).catch((err) => {
+  // 		console.log(err);
   // 	});
-  
+
   handleInputChange(event) {
     event.preventDefault();
     console.log('This is the event Name ', event.target.name);
     console.log('This is the input value ', event.target.value);
+    const curEventName = event.target.name;
+    this.setState({
+      [curEventName]: event.target.value,
+    });
   }
 
-  handleLogIn(username, password) {
+  handleLogIn(event) {
+    console.log(
+      'this is the username and password in this.state: ',
+      this.state
+    );
     fetch('/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: username, password: password }),
+      body: JSON.stringify({
+        username: this.state.username,
+        password: this.state.password,
+      }),
     })
       .then((response) => response.json())
       .then((data) => {
@@ -124,10 +135,12 @@ class App extends Component {
     return (
       <div>
         <Navbar />
-        {/* <button onClick={this.test}>Click ME!</button> */}
-        <center>
-          <h1>Covid Risk Assessment Quiz</h1>
-        </center>
+        <div className="mainPageHeader">
+          <center>
+            <h1>Covid Risk Assessment Quiz</h1>
+            <a href="/assessment"> Take the assessment without logging in.</a>
+          </center>
+        </div>
         <Switch>
           <Route exact path="/">
             <SignUp />

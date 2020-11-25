@@ -59,18 +59,18 @@ function LogIn(props) {
                   />
                 </InputGroup>
               </FormControl>
-              {/* <Link to={'/'}>
+              <Link to={'/assessment'}>
                 <Button
                   mt="30px"
                   mb="30px"
                   width="sm"
                   onClick={() => {
-                    this.handleSubmit();
+                    props.logIn();
                   }}
                 >
-                  Sign Up!
+                  Log In!
                 </Button>
-              </Link> */}
+              </Link>
             </Stack>
           </form>
         </Flex>
