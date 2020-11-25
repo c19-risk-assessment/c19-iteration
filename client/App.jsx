@@ -25,6 +25,7 @@ class App extends Component {
     this.removeFromAnswers = this.removeFromAnswers.bind(this);
     this.getRiskLevel = this.getRiskLevel.bind(this);
     this.getRiskyActs = this.getRiskyActs.bind(this);
+    // this.test = this.test.bind(this);
     this.handleLogIn = this.handleLogIn.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
   }
@@ -79,6 +80,20 @@ class App extends Component {
     return this.state.riskLevel;
   }
 
+  // test() {
+  //   fetch("/register", {
+	// 		method: "POST",
+	// 		headers: {
+	// 			"Content-Type": "application/json"
+	// 		},
+	// 		body: JSON.stringify({
+	// 			username: "testrun400",
+	// 			password: "testpw300",
+	// 		})
+	// 	}).catch((err) => {
+	// 		console.log(err);
+  // 	});
+  
   handleInputChange(event) {
     event.preventDefault();
     console.log('This is the event Name ', event.target.name);
@@ -109,8 +124,8 @@ class App extends Component {
     return (
       <div>
         <Navbar />
+        {/* <button onClick={this.test}>Click ME!</button> */}
         <center>
-          {' '}
           <h1>Covid Risk Assessment Quiz</h1>
         </center>
         <Switch>

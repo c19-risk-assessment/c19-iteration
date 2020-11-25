@@ -77,4 +77,12 @@ quizController.calculateRisk = (req, res, next) => {
   return next();
 }
 
+ // sqlController.logAssessment
+
+quizController.returnRisk = (req, res, next) => {
+
+  return next()
+}
+
+
 module.exports = quizController;
