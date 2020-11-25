@@ -2,16 +2,16 @@
 const express = require('express');
 const path = require('path');
 const passport = require('passport');
-const bcrypt = require('bcrypt'); 
+const bcrypt = require('bcrypt');
 const app = express();
 const PORT = 3000;
 const quizController = require('./quizController.js');
-const authenticationController = require('./authenticationController.js'); 
-const configurePassport = require('./configurePassport.js'); 
-const sqlController = require('./sqlController.js'); 
+const authenticationController = require('./authenticationController.js');
+const configurePassport = require('./configurePassport.js');
+const sqlController = require('./sqlController.js');
 const session = require('express-session');
-const bodyParser = require('body-parser')
-// establish connection to database 
+const bodyParser = require('body-parser');
+// establish connection to database
 
 const { Pool } = require('pg');
 
@@ -21,7 +21,7 @@ const pool = new Pool({
 });
 
 const db = {
-  async query (text, params, callback) {
+  async query(text, params, callback) {
     console.log('executed query', text);
     const data = await pool.query(text, params, callback);
     return data;
@@ -29,38 +29,50 @@ const db = {
 };
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false})); 
+app.use(express.urlencoded({ extended: false }));
 // app.use(express.raw())
 
-configurePassport(passport); 
+configurePassport(passport);
 
-app.use(session({
-    secret: "cats",
-    resave: false, 
-    saveUninitialized: false
-})); 
+app.use(
+  session({
+    secret: 'cats',
+    resave: false,
+    saveUninitialized: false,
+  })
+);
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-
 
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
 
 // route hander for registering the user and saving user's info to the database
 
-app.post('/register', authenticationController.checkNotAuthenticated,authenticationController.encryptAndSave, sqlController.insertUser, async (req, res) => {
-    try{
-        
-        // redirect user login after sucessful registration 
+app.post(
+  '/register',
+  authenticationController.checkNotAuthenticated,
+  authenticationController.encryptAndSave,
+  sqlController.insertUser,
+  async (req, res) => {
+    try {
+      // redirect user login after sucessful registration
 
-      res.redirect('/login');
+      res.redirect('/logIn');
     } catch {
       // if any errors occur send the user back to registration page
-      res.redirect('/register');
+      res.redirect('/signup');
     }
   }
+);
+
+app.post(
+  '/login',
+  passport.authenticate('local', {
+    successRedirect: '/',
+    failureRedirect: '/logIn',
+  })
 );
 
 // route handler to send risk assessment results back to client

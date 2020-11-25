@@ -23,10 +23,10 @@ class SignUp extends Component {
     super(props);
 
     this.state = {
-      firstName: '',
-      lastName: '',
+      first_name: '',
+      last_name: '',
       email: '',
-      userName: '',
+      username: '',
       password: '',
     };
     this.handleInputChange = this.handleInputChange.bind(this);
@@ -87,7 +87,7 @@ class SignUp extends Component {
                     <InputLeftAddon children="First Name:" />
                     <Input
                       variant="filled"
-                      name="firstName"
+                      name="first_name"
                       onChange={this.handleInputChange}
                     />
                   </InputGroup>
@@ -95,7 +95,7 @@ class SignUp extends Component {
                     <InputLeftAddon children="Last Name:" />
                     <Input
                       variant="filled"
-                      name="lastName"
+                      name="last_name"
                       onChange={this.handleInputChange}
                     />
                   </InputGroup>
@@ -111,7 +111,7 @@ class SignUp extends Component {
                     <InputLeftAddon children="Username:" />
                     <Input
                       variant="filled"
-                      name="userName"
+                      name="username"
                       onChange={this.handleInputChange}
                     />
                   </InputGroup>
@@ -124,7 +124,7 @@ class SignUp extends Component {
                     />
                   </InputGroup>
                 </FormControl>
-                <Link to={'/'}>
+                <Link to={'/logIn'}>
                   <Button
                     mt="30px"
                     mb="30px"
