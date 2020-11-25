@@ -8,6 +8,7 @@ import SignUp from './components/Form.jsx';
 import AssessmentPage from './components/AssessmentPage.jsx';
 import Navbar from './components/NavBar.jsx';
 import LogIn from './components/logIn.jsx';
+import Profile from './components/Profile.jsx';
 
 class App extends Component {
   constructor(props) {
@@ -138,7 +139,7 @@ class App extends Component {
         <div className="mainPageHeader">
           <center>
             <h1>Covid Risk Assessment Quiz</h1>
-            <a href="/assessment"> Take the assessment without logging in.</a>
+            <a href="/assessment">Take the risk assessment now</a>
           </center>
         </div>
         <Switch>
@@ -154,6 +155,9 @@ class App extends Component {
           </Route>
           <Route exact path="/signup">
             <SignUp />
+          </Route>
+          <Route exact path="/profile">
+            <Profile />
           </Route>
           <Route exact path="/logIn">
             <LogIn

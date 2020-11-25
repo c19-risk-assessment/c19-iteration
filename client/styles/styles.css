@@ -7,7 +7,7 @@ body {
   /* background: url("https://user-images.githubusercontent.com/54503796/99885890-1ba29d80-2c06-11eb-9852-199778c60251.jpg");
   background-size: 50%; */
   background: rgb(215, 247, 244);
-  background: url('https://user-images.githubusercontent.com/54503796/99887077-5957f400-2c0f-11eb-9720-eebdf664f283.png'),
+  /* background: url('https://user-images.githubusercontent.com/54503796/99887077-5957f400-2c0f-11eb-9720-eebdf664f283.png'),
     linear-gradient(
       90deg,
       rgba(215, 247, 244, 1) 0%,
@@ -15,7 +15,7 @@ body {
       rgba(240, 232, 127, 1) 50%,
       rgba(254, 189, 82, 1) 72%,
       rgba(255, 107, 0, 1) 100%
-    );
+    ); */
 }
 
 #assessment-page {
@@ -58,8 +58,8 @@ body {
   flex: 1;
   max-width: 100%;
   padding: 25px 30px;
-  /* margin: 0 60px; */
-  /* margin: 40px 100px 40px 40px; */
+  /* margin: 0 60px;
+  margin: 40px 100px 40px 40px; */
   box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
 }
 
@@ -68,7 +68,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: 2em;
-  color: #fe6c06;
+  color: #ce6177;
   padding: 5px 0 0 0;
   margin: 0px;
 }
@@ -84,10 +84,10 @@ body {
 .assessment-window {
   flex: 2;
   max-width: 60%;
-  /* align-self: center; */
+  align-self: center;
   padding: 30px 40px;
   margin: 0 120px;
-  /* margin: 40px 40px 40px 0; */
+  margin: 40px 40px 40px 0;
   border-radius: 10px;
   background: #ffffff;
   box-shadow: 5px 10px 20px rgba(10, 10, 10, 0.2);
@@ -97,16 +97,16 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: 2em;
-  color: #fe6c06;
+  color: #ce6177;
   padding: 0;
   margin: 0 0 5px 0;
 }
 
 #results-header {
-  font-family: 'Shrikhand', cursive;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   font-size: 2.5em;
-  color: #3a057b;
+  color: #ce6177;
   padding: 5px 0;
   margin: 0px;
 }
@@ -115,7 +115,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 700;
   font-size: 1.75em;
-  color: #3a057b;
+  color: black;
   padding: 5px 0;
   margin: 0px;
 }
@@ -124,7 +124,7 @@ body {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 2em;
-  color: #fe6c06;
+  color: #ce6177;
   padding: 0;
   margin: 0;
 }
