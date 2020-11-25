@@ -18,25 +18,17 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    // fetch('/api/')
-    //   .then((res) => {
-    //     // console.log('this is the response object:', res);
-    //     return res.json();
-    //   })
-    //   .then((allFarms) => {
-    //     // console.log('this is allFarms: ', allFarms);
-    //     if (!Array.isArray(allFarms)) allFarms = [];
-    //     return this.setState({
-    //       allFarms,
-    //       fetchedFarms: true,
-    //     });
-    //   })
-    //   .catch((err) =>
-    //     console.log(
-    //       'displayAllFarms.componentDidMount: get farms: ERROR: ',
-    //       err
-    //     )
-    //   );
+    fetch('/api')
+      .then((res) => {
+        console.log('this is the response object:', res.body);
+        return res.json();
+      })
+      .catch((err) =>
+        console.log(
+          'displayAllFarms.componentDidMount: get farms: ERROR: ',
+          err
+        )
+      );
   }
   render() {
     return (
