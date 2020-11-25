@@ -1,10 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Shrikhand&display=swap');
 
 body {
-<<<<<<< HEAD
   margin-top: 80px;
-=======
->>>>>>> main
   box-sizing: content-box;
   /* background: url("https://user-images.githubusercontent.com/54503796/99884480-83ec8180-2bfc-11eb-824b-2c484ba02014.jpg"); */
   /* background: url("https://user-images.githubusercontent.com/54503796/99885890-1ba29d80-2c06-11eb-9852-199778c60251.jpg");
@@ -19,15 +16,6 @@ body {
       rgba(254, 189, 82, 1) 72%,
       rgba(255, 107, 0, 1) 100%
     );
-}
-
-h1 {
-  font-family: 'Roboto', sans-serif;
-  font-weight: strong;
-  font-size: 10em;
-  color: #fe6c06;
-  padding: 0;
-  margin: 0 0 0 60px;
 }
 
 #assessment-page {
@@ -202,4 +190,27 @@ h1 {
   display: flex;
   height: 7.5%;
   justify-content: flex-end;
+}
+
+.mainPageHeader {
+  background-color: #ce6177;
+}
+
+a {
+  color: black;
+  font-weight: strong;
+  text-decoration: underline;
+  font-size: 1.5rem;
+}
+a:hover {
+  color: white;
+}
+
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-weight: strong;
+  font-size: 2rem;
+  color: white;
+  padding: 5px;
+  margin: 0 0 0 60px;
 }
