@@ -1,5 +1,5 @@
-const LocalStrategy = require('passport-local').Strategy; 
-const bcrypt = require('bcrypt'); 
+const LocalStrategy = require('passport-local').Strategy;
+const bcrypt = require('bcrypt');
 const sqlController = require('./sqlController.js');
 
 const { Pool } = require('pg');
@@ -10,7 +10,7 @@ const pool = new Pool({
 });
 
 const db = {
-  async query (text, params, callback) {
+  async query(text, params, callback) {
     console.log('executed query', text);
     const data = await pool.query(text, params, callback);
     return data;
@@ -25,31 +25,44 @@ function configurePassport(passport) {
   async function authenticate(username, password, done) {
     // SQL query to get a single user from the database that matches the username attribute passed in as an argument under the hood by passport
 
-    let user; // variable to which the resuls of SQL query will be saved
-
     // control flow to process resposne from SQL query
 
-        const findUserString = `SELECT * FROM users WHERE username = ${username}`
+    const findUserString = `SELECT username, password, _id FROM users WHERE username = '${username}'`;
 
-        const user = db.query(findUserString);// variable to which the resuls of SQL query will be saved 
+    const queryResult = await db.query(findUserString); // variable to which the resuls of SQL query will be saved
+    const user = queryResult.rows[0];
+
+    console.log('inside authenticate, user is', user);
+    const usrName = queryResult.rows[0].username;
+    const pswd = queryResult.rows[0].password;
+    const usrId = queryResult.rows[0]._id;
+
+    console.log(
+      'username is:',
+      usrName,
+      'password is: ',
+      password,
+      'id is: ',
+      usrId
+    );
 
     if (user == null) {
       // do not return a user
 
       return done(null, false);
     }
-
+    //
     // if a user is found in the database
-
+    //
     try {
-      // compare the the hash of the returned user's password to the hash of the password provided by the user at login
-
-      // if it matches return the result of the database query
-
-      if (await bcrypt.compare(password, user.password)) {
-        return done(null, user);
+      //       // compare the the hash of the returned user's password to the hash of the password provided by the user at login
+      //
+      //       // if it matches return the result of the database query
+      //
+      if (await bcrypt.compare(password, pswd)) {
+        return done(null, user); // does passport expect a "user" here to use it later on?
       }
-
+      //
       //if it does not match do not return the result of the query
       else {
         return done(null, false);
@@ -65,28 +78,31 @@ function configurePassport(passport) {
 
   // function with SQL query to find the user in the database from the user's id
 
-  function getUserByID(id) {
+  async function getUserByID(id) {
     // SQL query to get user from the database using id
+    console.log('you have entered getUserByID');
+    // SQL query to get user from the database using id
+    const getUserString = `SELECT username, password, _id FROM users WHERE '${id}' = _id`;
 
-        // SQL query to get user from the database using id 
-        const getUserString = `SELECT * FROM users WHERE ${id} = _id`
-
-        const user = db.query(getUserString); // constant to which the result of the SQL query will be assigned 
-
-        // return the user 
-        return user
-    }  
+    const queryResult = await db.query(getUserString); // constant to which the result of the SQL query will be assigned
+    const user = queryResult.rows[0];
+    // user.rows[0]._id
+    // return the user
+    console.log('leaving get user by id, user is ', user);
+    return user;
+  }
 
   passport.use(new LocalStrategy(authenticate));
 
   // serialize user id for cookie placed on the browers
 
-  passport.serializeUser((user, done) => done(null, user.id));
+  passport.serializeUser((user, done) => done(null, user._id));
 
   // deserialize user id from the cookie and use the deserialized id to find the user using the getUserById function
 
   passport.deserializeUser((id, done) => {
-    return done(null, getUserById(id));
+    console.log('inside deserialize');
+    return done(null, getUserByID(id));
   });
 }
 

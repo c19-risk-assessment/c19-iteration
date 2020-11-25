@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { Pool } = require('pg');
 
 const pool = new Pool({
@@ -6,7 +7,7 @@ const pool = new Pool({
 });
 
 const db = {
-  async query (text, params, callback) {
+  async query(text, params, callback) {
     console.log('executed query', text);
     const data = await pool.query(text, params, callback);
     return data;
@@ -17,75 +18,73 @@ const db = {
 const sqlController = {};
 
 sqlController.insertUser = async (req, res, next) => {
-  console.log('inside insertUser!')
+  console.log('inside insertUser!');
   const pwd = res.locals.encryptedPwd;
-  const {username, email, first_name, last_name} = req.body
+  const { username, email, first_name, last_name } = req.body;
 
- // check if the user currently exists
- // if so, redirect to signup
-//  const findUserString = `SELECT * FROM users WHERE username = ${username}`
-//  const user = await db.query(findUserString)
-//  if (user) return res.redirect('/signup')
+  // check if the user currently exists
+  // if so, redirect to signup
+  //  const findUserString = `SELECT * FROM users WHERE username = ${username}`
+  //  const user = await db.query(findUserString)
+  //  if (user) return res.redirect('/signup')
 
- // constructs db query for creating a new user
- const insertUserString = `INSERT INTO users(_id, username, password, email, first_name, last_name) Values(default, '${username}', '${pwd}', '${email}', '${first_name}', '${last_name}')`
+  // constructs db query for creating a new user
+  const insertUserString = `INSERT INTO users(_id, username, password, email, first_name, last_name) Values(default, '${username}', '${pwd}', '${email}', '${first_name}', '${last_name}')`;
 
   //creates new user in the database
-  db.query(insertUserString)
-  .catch(()=>  res.redirect('/register'))
-  
-}
+  db.query(insertUserString).catch(() => res.redirect('/register'));
+};
 
-sqlController.findUser = (req, res, next) => {
-    const {username} = req.body
+// sqlController.findUser = (req, res, next) => {
+//   const { username, password } = req.body;
 
-    const findUserString = `SELECT * FROM users WHERE username = ${username}`
+//   const findUserString = `SELECT username, password FROM users WHERE username = ${username}`;
 
-    const user = db.query(findUserString)
-    res.locals.user = user
-    
-    return next();
-}
+//   const user = db.query(findUserString);
+//   if (bcrypt.compare(password, user.password)) {
+//     return next();
+//   }
+//   return res.redirect('/logIn');
+
+//   // res.locals.user = user;
+// };
 
 sqlController.deleteUser = (req, res, next) => {
-    const {username} = req.body
+  const { username } = req.body;
 
-    const deleteUserString = `DELETE FROM users WHERE username = ${username}`
+  const deleteUserString = `DELETE FROM users WHERE username = ${username}`;
 
-    db.query(deleteUserString)
+  db.query(deleteUserString);
 
-    return next();
-}
+  return next();
+};
 
 sqlController.logAssessment = (req, res, next) => {
   // remember to acct for: location, positive rates, user_id
-  const { activities, zipcode } = req.body
-  const today = new Date().toLocaleDateString()
+  const { activities, zipcode } = req.body;
+  const today = new Date().toLocaleDateString();
   // [mail, groceries] >> 'mail, groceries' >> true, true
-  
-  const activitesString = activities.join(', ')
-  const activitiesValues = activities.map(activity => true).join(', ')
 
-  // create a session 
-  const createSessionString = `INSERT INTO assessments(_id, ${  activitesString 
-  }, ${today}, ${zipcode}, ${user_id}) values(default, ${  activitiesValues  }, date, zipcode, user_id)` // remember to change pos_rate and loc_id
+  const activitesString = activities.join(', ');
+  const activitiesValues = activities.map((activity) => true).join(', ');
 
-  db.query(createSessionString)
+  // create a session
+  const createSessionString = `INSERT INTO assessments(_id, ${activitesString}, ${today}, ${zipcode}, ${user_id}) values(default, ${activitiesValues}, date, zipcode, user_id)`; // remember to change pos_rate and loc_id
 
-
-}
+  db.query(createSessionString);
+};
 
 sqlController.findAllAssements = (req, res, next) => {
-  const user_id = req.body // unsure if this data will actually be in req.body
+  const user_id = req.body; // unsure if this data will actually be in req.body
 
-  const findAllString = `SELECT * FROM assessments WHERE user_id = ${user_id}`
+  const findAllString = `SELECT * FROM assessments WHERE user_id = ${user_id}`;
 
-  const assessments = db.query(findAllString)
+  const assessments = db.query(findAllString);
 
-  res.locals.assessments = assessments
-  
+  res.locals.assessments = assessments;
+
   return next();
-}
+};
 
 // middleware below is used to find the assessment of a guest user (meaning they are not signed in)
 // does the guest assessment data even need to be in the database?
